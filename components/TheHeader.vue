@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <NuxtLink class="nav-link active" to="/">Home</NuxtLink>
+              <NuxtLink class="nav-link " to="/">Home</NuxtLink>
             </li>
             <li class="nav-item">
               <NuxtLink class="nav-link" to="/students">Students</NuxtLink>
@@ -19,7 +19,7 @@
               <NuxtLink class="nav-link" to="/about-us">About Us</NuxtLink>
             </li>
             <li class="nav-item">
-              <NuxtLink class="nav-link" to="/contact-us">Contact Us</NuxtLink>
+              <NuxtLink class="nav-link" to="/contact-us" >Contact Us</NuxtLink>
             </li>
           </ul>
         </div>
@@ -28,9 +28,19 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { useRoute } from 'vue-router';
 
+const isActive = (route) => {
+  const currentRoute = useRoute();
+  return currentRoute.path === route;
+};
 </script>
 
-<style>
+<style scoped>
+/* Add your custom styles here */
+.nav-link.active {
+  color: #ffffff;
+  /* Set the active link color */
+}
 </style>

@@ -38,5 +38,9 @@ export default defineNuxtConfig({
       ]
       // viewport: ', initial-scale=1',
     }
+  },
+  
+  generate: {
+    fallback: true,
   }
 })
