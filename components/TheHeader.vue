@@ -13,6 +13,9 @@
               <NuxtLink class="nav-link active" to="/">Home</NuxtLink>
             </li>
             <li class="nav-item">
+              <NuxtLink class="nav-link" to="/students">Students</NuxtLink>
+            </li>
+            <li class="nav-item">
               <NuxtLink class="nav-link" to="/about-us">About Us</NuxtLink>
             </li>
             <li class="nav-item">
