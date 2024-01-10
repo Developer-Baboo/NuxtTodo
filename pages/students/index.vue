@@ -43,32 +43,56 @@
 </template>
 
 <script>
+// Importing a tool called axios for making HTTP requests
 import axios from 'axios';
+
+// Defining a new component called 'student'
 export default {
+    // The name of the component
     name: "student",
+
+    // Data function returning initial data for the component
     data() {
         return {
+            // Object to store a list of students
             students: {},
-            isLoading:true,
+            // Boolean flag for loading state
+            isLoading: true,
         }
     },
+
+    // Lifecycle hook: mounted is called after the component has been added to the DOM
     mounted() {
+        // Call the getStudents method to fetch student data when the component is mounted
         this.getStudents();
-        //
     },
+
+    // Methods defined for the component
     methods: {
+        // Method to fetch a list of students using an HTTP GET request
         getStudents() {
+            // Set isLoading to true to show loading state
             this.isLoading = true;
+
+            // Make a GET request to the specified API endpoint
             axios.get(`http://localhost:8000/api/students`).then(res => {
+                // Once the data is fetched, set isLoading to false and update the students object
                 this.isLoading = false;
                 this.students = res.data.students;
             });
         },
+
+        // Method to delete a student using an HTTP DELETE request
         deleteStudent(event, studentId) {
-            if (confirm('Are you sure, that you want to delete this data? ')) {
+            // Ask for confirmation before deleting
+            if (confirm('Are you sure you want to delete this data?')) {
+                // Change the button text to indicate deletion is in progress
                 event.target.innerText = "Deleting";
-                axios.delete(`http://localhost:8000/api/students/${studentId}/delete`).then(res => { 
-                    event.target.innertText = "Delete";
+
+                // Make a DELETE request to delete the student data
+                axios.delete(`http://localhost:8000/api/students/${studentId}/delete`).then(res => {
+                    // Once deletion is successful, change the button text back and update the student list
+                    event.target.innerText = "Delete";
                     this.getStudents();
                 });
             }
@@ -76,6 +100,7 @@ export default {
     }
 }
 </script>
+
 
 <style>
 

@@ -45,36 +45,51 @@
 </template>
 
 <script>
+// Importing a tool called axios for making HTTP requests
 import axios from 'axios';
+
+// Defining a new component called 'studentCreate'
 export default {
+    // The name of the component
     name: 'studentCreate',
+
+    // Data function returning initial data for the component
     data() {
         return {
+            // Object to store student information with initial values
             student: {
                 name: '',
                 course: '',
                 email: '',
                 phone: '',
             },
+            // Boolean flag for loading state
             isLoading: false,
+            // Loading title text
             isLoadingTitle: 'Loading',
+            // Object to store validation errors
             errorList: {}
         }
     },
+
+    // Methods defined for the component
     methods: {
-
+        // Method to save student data using an HTTP POST request
         saveStudent() {
-
-            // alert("I am here");
+            // Set isLoading to true and update loading title
             this.isLoading = true;
             this.isLoadingTitle = "Saving";
 
+            // Store the reference to 'this' in a variable for later use in the catch block
             var myThis = this;
 
+            // Make a POST request to save new student data
             axios.post(`http://localhost:8000/api/students`, this.student).then(res => {
+                // Once the save is successful, log the response, show an alert, and reset loading state
                 console.log(res, 'res');
                 alert(res.data.message);
 
+                // Clear input fields after successful save
                 this.student.name = '';
                 this.student.course = '';
                 this.student.email = '';
@@ -85,14 +100,16 @@ export default {
 
             })
                 .catch(function (error) {
-                console.log(error, 'errors');
-                if (error.response) {
-                    if (error.response.status == 422) {
-                        myThis.errorList = error.response.data.errors;
+                    // If there's an error, log it and handle validation errors if status is 422
+                    console.log(error, 'errors');
+                    if (error.response) {
+                        if (error.response.status == 422) {
+                            myThis.errorList = error.response.data.errors;
+                        }
                     }
-                }
-                myThis.isLoading = false;
-            });
+                    // Set isLoading to false to end the loading state
+                    myThis.isLoading = false;
+                });
         }
     }
 }
