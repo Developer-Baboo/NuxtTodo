@@ -2,7 +2,7 @@
     <div>
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only"></span>
-        </div>{{ title }} ....
+        </div>{{ title }}
     </div>
 </template>
 

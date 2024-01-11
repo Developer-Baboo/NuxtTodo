@@ -84,6 +84,7 @@ export default {
             var myThis = this;
 
             // Make a POST request to save new student data
+            //this.student (here we push student data object to api )
             axios.post(`http://localhost:8000/api/students`, this.student).then(res => {
                 // Once the save is successful, log the response, show an alert, and reset loading state
                 console.log(res, 'res');
@@ -99,17 +100,17 @@ export default {
                 this.isLoadingTitle = 'Loading';
 
             })
-                .catch(function (error) {
-                    // If there's an error, log it and handle validation errors if status is 422
-                    console.log(error, 'errors');
-                    if (error.response) {
-                        if (error.response.status == 422) {
-                            myThis.errorList = error.response.data.errors;
-                        }
+            .catch(function (error) {
+                // If there's an error, log it and handle validation errors if status is 422
+                // console.log(error, 'errors');
+                if (error.response) {
+                    if (error.response.status == 422) {
+                        myThis.errorList = error.response.data.errors;
                     }
-                    // Set isLoading to false to end the loading state
-                    myThis.isLoading = false;
-                });
+                }
+                // Set isLoading to false to end the loading state
+                myThis.isLoading = false;
+            });
         }
     }
 }
